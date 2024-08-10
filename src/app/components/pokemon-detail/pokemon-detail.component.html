@@ -1,0 +1,29 @@
+<div class="pokemon-detail" >
+  <div *ngIf="isLoading">
+    <img src="https://media.tenor.com/IQTMA9sAyWsAAAAj/pikachu-pokemon.gif" alt="Loading..." class="loading">
+  </div>
+  <div *ngIf="!isLoading && isElectric" [ngClass]="getPokemonClass(pokemon)">
+    <h2>{{ pokemon.name }}</h2>
+    <p>ID: {{ pokemon.id }}</p>
+    <p>Type: {{ pokemon.type }}</p>
+    <p>Weaknesses: {{ pokemonWeaknesses }}</p>
+    <img src="https://svgsilh.com/svg/2031288.svg" alt="Loading..." class="loading">
+    <a [routerLink]="['/pokemon-list']">Back to list</a>
+  </div>
+  <div *ngIf="!isLoading && isWater" [ngClass]="getPokemonClass(pokemon)">
+    <h2>{{ pokemon.name }}</h2>
+    <p>ID: {{ pokemon.id }}</p>
+    <p>Type: {{ pokemon.type }}</p>
+    <p>Weaknesses: {{ pokemonWeaknesses }}</p>
+    <img src="https://svgsilh.com/svg/311296.svg" alt="Loading..." class="loading">
+    <a [routerLink]="['/pokemon-list']">Back to list</a>
+  </div>
+  <div *ngIf="!isLoading && isFire" [ngClass]="getPokemonClass(pokemon)">
+    <h2>{{ pokemon.name }}</h2>
+    <p>ID: {{ pokemon.id }}</p>
+    <p>Type: {{ pokemon.type }}</p>
+    <p>Weaknesses: {{ pokemonWeaknesses }}</p>
+    <img src="https://www.svgrepo.com/show/59314/fire.svg" alt="Loading..." class="loading">
+    <a [routerLink]="['/pokemon-list']">Back to list</a>
+  </div>
+</div>

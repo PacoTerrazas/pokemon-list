@@ -1,0 +1,14 @@
+/* header.component.css */
+header {
+    background-color: #fff;;
+    color: #fff;
+    padding: 10px 0;
+    position: relative;
+  }
+
+  header #logo{ 
+    width: auto;
+    height: 10rem;
+  }
+  
+  
