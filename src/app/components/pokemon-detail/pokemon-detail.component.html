@@ -1,29 +1,35 @@
-<div class="pokemon-detail" >
+<div>
   <div *ngIf="isLoading">
     <img src="https://media.tenor.com/IQTMA9sAyWsAAAAj/pikachu-pokemon.gif" alt="Loading..." class="loading">
   </div>
-  <div *ngIf="!isLoading && isElectric" [ngClass]="getPokemonClass(pokemon)">
-    <h2>{{ pokemon.name }}</h2>
-    <p>ID: {{ pokemon.id }}</p>
-    <p>Type: {{ pokemon.type }}</p>
-    <p>Weaknesses: {{ pokemonWeaknesses }}</p>
-    <img src="https://svgsilh.com/svg/2031288.svg" alt="Loading..." class="loading">
-    <a [routerLink]="['/pokemon-list']">Back to list</a>
+  <div class="pokemon-details" *ngIf="pokemonDetail">
+    <h2>{{ pokemonDetail.name | uppercase }}</h2>
+    <div class="details">
+      <div>
+        <strong>Height:</strong> {{ pokemonDetail.height }}
+      </div>
+      <div>
+        <strong>Base Experience:</strong> {{ pokemonDetail.base_experience }}
+      </div>
+     <div>
+      <strong>Abilities:</strong>
+      <ul>
+        <li *ngFor="let ability of pokemonDetail.abilities">
+          {{ ability.ability.name}}
+        </li>
+      </ul>
+     </div>
+     <div>
+      <strong>Type:</strong>
+      <ul>
+        <li *ngFor="let type of pokemonDetail.types">
+          {{ type.type.name}}
+        </li>
+      </ul>
+     </div>
+    </div>
   </div>
-  <div *ngIf="!isLoading && isWater" [ngClass]="getPokemonClass(pokemon)">
-    <h2>{{ pokemon.name }}</h2>
-    <p>ID: {{ pokemon.id }}</p>
-    <p>Type: {{ pokemon.type }}</p>
-    <p>Weaknesses: {{ pokemonWeaknesses }}</p>
-    <img src="https://svgsilh.com/svg/311296.svg" alt="Loading..." class="loading">
-    <a [routerLink]="['/pokemon-list']">Back to list</a>
-  </div>
-  <div *ngIf="!isLoading && isFire" [ngClass]="getPokemonClass(pokemon)">
-    <h2>{{ pokemon.name }}</h2>
-    <p>ID: {{ pokemon.id }}</p>
-    <p>Type: {{ pokemon.type }}</p>
-    <p>Weaknesses: {{ pokemonWeaknesses }}</p>
-    <img src="https://www.svgrepo.com/show/59314/fire.svg" alt="Loading..." class="loading">
-    <a [routerLink]="['/pokemon-list']">Back to list</a>
-  </div>
+  <div class="pagination">
+    <button type="button" class="btn btn-primary searchButton" (click)="goBack()">Back to table</button>
+</div>
 </div>

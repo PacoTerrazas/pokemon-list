@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { PokeApiService } from '../../service/poke-api.service';
 import { FormsModule } from '@angular/forms';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -13,6 +13,7 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 })
 export class PokemonListComponent implements OnInit {
 
+  isLoading = true;
   pokemons: any[] = [];
   allPokemons: any[] = [];
   filteredPokemons: any[] = [];
@@ -21,47 +22,35 @@ export class PokemonListComponent implements OnInit {
   itemsPerPage: number = 10;
   totalPages: number = 1;
 
-  constructor(private pokemonService: PokeApiService) { }
+  constructor(private pokemonService: PokeApiService, private router: Router) { }
+
+    offset: number = 0;
 
   ngOnInit(): void {
-    this.pokemons = this.pokemonService.getPokemons();
-    this.filteredPokemons = this.pokemons;
-    this.calculateTotalPages();
-    this.updateDisplayedPokemons();
+    this.pokemonService.getPokemonList(this.offset).subscribe(data => {
+      this.pokemons = data.results;
+      this.isLoading = false;
+    });
   }
 
-  performSearch(): void {
-    this.allPokemons = this.pokemonService.getPokemons();
-    if (!this.searchTerm) {
-      this.pokemons = this.allPokemons;
-      this.filteredPokemons= this.allPokemons;
-    } else {
-      const term = this.searchTerm.toLowerCase();
-      this.filteredPokemons = this.allPokemons.filter(pokemon =>
-        pokemon.name.toLowerCase().includes(term) ||
-        pokemon.type.toLowerCase().includes(term)
-      );
-      this.pokemons = this.filteredPokemons;
-    }
-    this.currentPage = 1;
-    this.calculateTotalPages();
-    this.updateDisplayedPokemons();
+  viewDetails(url: string): void {
+    this.router.navigate(['/pokemon-detail', encodeURIComponent(url)]);
   }
 
-  calculateTotalPages(): void {
-    this.totalPages = Math.ceil(this.filteredPokemons.length / this.itemsPerPage);
+  nextPage(): void {
+    this.isLoading = true;
+    this.offset += 10;
+    this.pokemonService.getPokemonList(this.offset).subscribe(data => {
+      this.pokemons = data.results;
+      this.isLoading = false;
+    });
   }
 
-  updateDisplayedPokemons(): void {
-    const start = (this.currentPage - 1) * this.itemsPerPage;
-    const end = start + this.itemsPerPage;
-    this.pokemons = this.filteredPokemons.slice(start, end);
+  previousPage(): void {
+    this.offset -= 10;
+    this.pokemonService.getPokemonList(this.offset).subscribe(data => {
+      this.pokemons = data.results;
+    });
   }
 
-  goToPage(page: number): void {
-    if (page > 0 && page <= this.totalPages) {
-      this.currentPage = page;
-      this.updateDisplayedPokemons();
-    }
-  }
 }

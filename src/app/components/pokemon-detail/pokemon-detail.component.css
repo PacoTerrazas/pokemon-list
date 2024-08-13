@@ -1,45 +1,28 @@
-.pokemon-detail {
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .pokemon-detail h2 {
-    color: #ffcb05; 
-    border-bottom: 2px solid #000; 
-  }
-  
-  .pokemon-detail p {
-    font-size: 1.2em;
-    color: black;
-  }
+.pokemon-details {
+  margin: 20px;
+  font-family: "Press Start 2P", cursive;
+  text-align: center;
+  padding: 20px;
+}
 
-  .electric-type h2 {
-    color: yellow;
-    text-shadow: 0 0 11px black;
-    border-bottom: 2px solid #000; 
-    padding: 10px;
-    font-family: "Press Start 2P", cursive;
-  }
+.details {
+  margin: 20px;
+  font-family: "Press Start 2P", cursive;
+  text-align: center;
+  padding: 20px;
+}
 
-  .water-type h2 {
-    color: rgb(0, 183, 255);
-    text-shadow: 0 0 11px black;
-    border-bottom: 2px solid #000; 
-    padding: 10px;
-    font-family: "Press Start 2P", cursive;
-  }
-
-  .fire-type h2 {
-    color: rgb(255, 38, 0);
-    text-shadow: 0 0 11px black;
-    border-bottom: 2px solid #000; 
-    padding: 10px;
-    font-family: "Press Start 2P", cursive;
-  }
 
   .loading {
   width: auto;
   height: 10rem;
   display: block;
   margin: 20px auto;
+}
+
+.pagination {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin: 20px;
 }

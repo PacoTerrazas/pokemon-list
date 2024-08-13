@@ -6,7 +6,7 @@ import { NgModule } from '@angular/core';
 export const routes: Routes = [
     { path: '', redirectTo: '/pokemon-list', pathMatch: 'full' },
   { path: 'pokemon-list', component: PokemonListComponent },
-  { path: 'pokemon-detail/:id', component: PokemonDetailComponent }
+  { path: 'pokemon-detail/:url', component: PokemonDetailComponent }
 ];
 
 @NgModule({
